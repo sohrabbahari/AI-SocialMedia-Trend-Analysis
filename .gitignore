@@ -1,1 +1,11 @@
- 
+ # Ignore Python virtual environment
+venv/
+
+# Ignore large dataset files
+*.csv
+*.json
+*.log
+
+# Ignore system files
+.DS_Store
+
