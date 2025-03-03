@@ -3,7 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load sentiment analysis results
-data_file = "../data/sentiment_analysis_results.csv"
+data_file = "data/sentiment_analysis_results.csv"
+
 
 st.title("📊 AI Twitter Sentiment Analysis Dashboard")
 st.write("This dashboard shows sentiment analysis of real-time tweets about AI.")
