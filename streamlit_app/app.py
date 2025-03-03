@@ -5,13 +5,15 @@ import matplotlib.pyplot as plt
 # Load sentiment analysis results
 data_file = "data/sentiment_analysis_results.csv"
 
-
 st.title("📊 AI Twitter Sentiment Analysis Dashboard")
 st.write("This dashboard shows sentiment analysis of real-time tweets about AI.")
 
 # Check if the sentiment analysis file exists
 try:
     df = pd.read_csv(data_file)
+
+    # Rename columns if necessary
+    df = df.rename(columns={"Tweet": "Text"})  # Fix column name
 
     # Show raw tweet data
     st.subheader("🔹 Raw Tweets")
@@ -32,3 +34,6 @@ try:
 except FileNotFoundError:
     st.error("❌ No sentiment analysis results found! Run `sentiment_analysis.py` first.")
 
+except KeyError:
+    st.error("❌ The CSV file structure is incorrect. Check column names in `sentiment_analysis_results.csv`.")
+    st.write("Detected columns:", df.columns.tolist())  # Debugging output
