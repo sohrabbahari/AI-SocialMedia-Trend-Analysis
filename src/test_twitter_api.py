@@ -1,8 +1,9 @@
 import tweepy
 import yaml
-import time  # Import time module for delay
+import pandas as pd
+import os
 
-# Load API keys from config.yaml
+# Load Twitter API keys from config.yaml
 with open("config.yaml", "r") as file:
     config = yaml.safe_load(file)
 
@@ -12,15 +13,21 @@ client = tweepy.Client(bearer_token=config["twitter"]["bearer_token"])
 # Define search query
 query = "AI -is:retweet lang:en"
 
-# Add delay to avoid hitting rate limits
-time.sleep(5)  # Wait 5 seconds before requesting
+# Fetch tweets
+tweets = client.search_recent_tweets(query=query, max_results=20, tweet_fields=["created_at", "text"])
 
-# Fetch recent tweets
-tweets = client.search_recent_tweets(query=query, max_results=10)
+# Ensure 'data/' directory exists
+data_folder = "data"
+if not os.path.exists(data_folder):
+    os.makedirs(data_folder)
 
-# Print fetched tweets
+# Process tweets
 if tweets.data:
-    for tweet in tweets.data:
-        print(tweet.text)
+    tweet_list = [[tweet.id, tweet.created_at, tweet.text] for tweet in tweets.data]
+    df = pd.DataFrame(tweet_list, columns=["Tweet_ID", "Timestamp", "Text"])
+    
+    # Save tweets to CSV
+    df.to_csv(os.path.join(data_folder, "real_tweets.csv"), index=False)
+    print("✅ Fetched and saved real tweets to 'data/real_tweets.csv'!")
 else:
-    print("No tweets found.")
+    print("❌ No tweets found. Try again later.")
