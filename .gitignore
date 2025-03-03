@@ -1,11 +1,11 @@
- # Ignore Python virtual environment
+# Ignore virtual environment
 venv/
+
+# Ignore all `.dll` and `.lib` files
+*.dll
+*.lib
 
 # Ignore large dataset files
 *.csv
 *.json
 *.log
-
-# Ignore system files
-.DS_Store
-
