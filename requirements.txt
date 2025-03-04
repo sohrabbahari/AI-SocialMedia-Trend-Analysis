@@ -1,5 +1,7 @@
 streamlit
 pandas
 matplotlib
-nltk
 tweepy
+transformers
+torch
+pyyaml  # <== This is missing, add it!
