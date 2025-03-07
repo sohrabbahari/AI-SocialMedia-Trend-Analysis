@@ -4,4 +4,7 @@ matplotlib
 tweepy
 transformers
 torch
-pyyaml  # <== This is missing, add it!
+pyyaml
+folium
+geopy
+wordcloud
