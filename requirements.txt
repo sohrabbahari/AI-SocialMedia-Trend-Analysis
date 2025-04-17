@@ -8,3 +8,4 @@ pyyaml
 folium
 geopy
 wordcloud
+streamlit_folium
